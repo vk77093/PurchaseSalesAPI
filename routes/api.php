@@ -14,6 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+use App\Http\Controllers\BuyerController;
+Route::resource('buyers', BuyerController::class,['only'=>['index','show']]);
+
+use App\Http\Controllers\CategoryController;
+Route::resource('categories', CategoryController::class,['except'=>['create','edit']]);
+
+use App\Http\Controllers\ProductController;
+Route::resource('products', ProductController::class,['only'=>['index','show']]);
+
+use App\Http\Controllers\SellerController;
+Route::resource('seller', SellerController::class,['only'=>['index','show']]);
+
+use App\Http\Controllers\TransactionController;
+Route::resource('transaction', TransactionController::class,['only'=>['index','show']]);
+
+use App\Http\Controllers\UserController;
+Route::resource('users', UserController::class,['except'=>['create','edit']]);
