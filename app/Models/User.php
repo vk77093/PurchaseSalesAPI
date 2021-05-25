@@ -26,7 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'verified','verificationToken','admin'
+        'verified','c','admin'
     ];
 
     /**
@@ -62,5 +62,11 @@ class User extends Authenticatable
 
     public static function generateVerifiedToken(){
         return Str::random(40);
+    }
+    public function setNameAttribute($name){
+         $this->attributes['name']=Str::lower($name);
+    }
+    public function getNameAttribute($name){
+return ucwords($name);
     }
 }
