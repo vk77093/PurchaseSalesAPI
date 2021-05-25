@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Seller;
 use App\Models\User;
 
+
 class TransactionFactory extends Factory
 {
     /**
@@ -15,6 +16,7 @@ class TransactionFactory extends Factory
      * @var string
      */
     protected $model = Transaction::class;
+    
 
     /**
      * Define the model's default state.

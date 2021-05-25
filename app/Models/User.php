@@ -7,16 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable,softDeletes;
     const VERIFIED_USER ='1';
     const UNVERIFIED_USER ='0';
 
     const ADMIN_USER ='true';
     const REGULAR_USER='false';
  protected $table='users';
+ protected $dates=['deleted_at'];
     /**
      * The attributes that are mass assignable.
      *
