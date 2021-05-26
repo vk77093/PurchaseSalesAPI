@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
-class TransactionController extends Controller
+class TransactionController extends TraitController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transaction=Transaction::all();
+        return $this->showAll($transaction);
     }
 
     /**
@@ -44,9 +45,11 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show(Transaction $transaction,$id)
     {
-        //
+      
+       
+        return $this->showOne($transaction::find($id));
     }
 
     /**

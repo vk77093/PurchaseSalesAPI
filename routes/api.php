@@ -34,3 +34,18 @@ Route::resource('transaction', TransactionController::class,['only'=>['index','s
 
 use App\Http\Controllers\UserController;
 Route::resource('users', UserController::class,['except'=>['create','edit']]);
+
+use App\Http\Controllers\TransactionCategoryController;
+Route::resource('transaction/{id}/categories', TransactionCategoryController::class,['only'=>['index']]);
+use App\Http\Controllers\TransactionSellerController;
+//Route::get('transactionsseller', [TransactionSellerController::class,'index']);
+Route::resource('transaction/{id}/seller', TransactionSellerController::class,['only'=>['index']]);
+
+use App\Http\Controllers\BuyerTransactionController;
+Route::resource('buyers/{id}/transaction', BuyerTransactionController::class,['only'=>['index']]);
+
+use App\Http\Controllers\BuyerProductController;
+Route::resource('buyers.products', BuyerProductController::class,['only'=>['index']]);
+
+use App\Http\Controllers\BuyerSellerController;
+Route::resource('buyers.seller', BuyerSellerController::class,['only'=>['index']]);
