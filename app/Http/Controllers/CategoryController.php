@@ -91,4 +91,54 @@ $category=Category::find($id);
        $category->delete();
        return $this->showOne($category);
     }
+
+    // addtional method for the Category related views
+
+    //CategoryProduct -- for getting the list of products
+    // for specific category
+    public function categoryProduct($id){
+        $category=Category::find($id);
+        // return "Hello i will show the products
+        // with specific category $id";
+        $products=$category->product;
+        // return $this->showAll($products);
+        return response()->json(['data'=>$products]);
+        //here the issue of pivot table is occuring that will
+        // be remove at the category and products model
+    }
+
+    /****
+     * CategorySeller-- for getting the list of seller
+     * for the some specific category products
+     */
+public function categorySeller($id){
+$category=Category::find($id);
+$seller=$category->product()->with('seller')->get()
+->pluck('seller')->unique('id')->values();
+return response ()->json(['data'=>$seller]);
+
+}
+ /**
+  *CategoryTransaction-- for getting the list of transactions
+  * based on the specific category
+   */   
+  public function categoryTransaction($id){
+     $category=Category::find($id);
+     $transactions=$category->product()->whereHas('transaction') 
+     ->with('transaction')->get()->pluck('transaction')
+     ->collapse();
+     return response()->json(['data'=>$transactions]);
+  }
+  /**
+   * categoryBuyer-- for getting the list of all the buyers
+   * for the specific category
+   */
+  public function categoryBuyer($id){
+      $category=Category::find($id);
+      $buyers=$category->product()->whereHas('transaction')
+      ->with('transaction.buyer')->get()
+      ->pluck('transaction')->collapse()
+      ->pluck('buyer')->unique('id')->values();
+      return response()->json(['data'=>$buyers]);
+  }
 }

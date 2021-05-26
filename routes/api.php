@@ -49,3 +49,11 @@ Route::resource('buyers.products', BuyerProductController::class,['only'=>['inde
 
 use App\Http\Controllers\BuyerSellerController;
 Route::resource('buyers.seller', BuyerSellerController::class,['only'=>['index']]);
+
+use App\Http\Controllers\BuyerCategoryController;
+Route::resource('buyers.categories', BuyerCategoryController::class,['only'=>'index']);
+
+Route::get('categories/{id}/products', [CategoryController::class,'categoryProduct']);
+Route::get('categories/{id}/seller',[CategoryController::class,'categorySeller']);
+Route::get('categories/{id}/transaction',[CategoryController::class,'categoryTransaction']);
+Route::get('categories/{id}/buyers',[CategoryController::class,'categoryBuyer']);
