@@ -57,3 +57,9 @@ Route::get('categories/{id}/products', [CategoryController::class,'categoryProdu
 Route::get('categories/{id}/seller',[CategoryController::class,'categorySeller']);
 Route::get('categories/{id}/transaction',[CategoryController::class,'categoryTransaction']);
 Route::get('categories/{id}/buyers',[CategoryController::class,'categoryBuyer']);
+
+//Seller Transaction
+Route::get('seller/{id}/transaction',[SellerController::class,'sellerTransaction']);
+Route::get('seller/{id}/categories',[SellerController::class,'sallerCategory']);
+Route::get('seller/{id}/buyers',[SellerController::class,'sellerBuyer']);
+Route::get('seller/{id}/products',[SellerController::class,'sellerProduct']);

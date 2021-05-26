@@ -62,6 +62,7 @@ return $this->showOne($category);
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
+     * @param \Illuminate\Suport\Facades\Validator
      */
     public function update(Request $request,$id)
     {
@@ -71,6 +72,7 @@ $category=Category::find($id);
             'name' => 'required',
             'description' => 'required',
         ];
+
         $validate=Validator::make($request->all(),$rules);
         if($validate->fails()){
             return $this->errorResponse($validate->errors(),400);
