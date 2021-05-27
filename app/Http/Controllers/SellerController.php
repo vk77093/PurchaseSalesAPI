@@ -154,6 +154,6 @@ return response()->json(['data'=>$product],200);
         $product = Product::find($proID);
         $this->checkSeller2($seller,$product);
         $product->delete();
-        return response()->json(['data'=>$product]);
+    return response()->json(['data'=>$product]);
     }
 }

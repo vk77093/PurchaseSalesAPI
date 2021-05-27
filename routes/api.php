@@ -66,3 +66,13 @@ Route::get('seller/{id}/products',[SellerController::class,'sellerProduct']);
 Route::post('seller/{id}/products',[SellerController::class,'sellerProductStore']);
 Route::put('seller/{id}/products/{proID}',[SellerController::class,'sellerProductUpdate']);
 Route::delete('seller/{id}/products/{proID}',[SellerController::class,'sellerProductDelete']);
+
+//Product Transaction
+Route::get('products/{id}/transaction',[ProductController::class,'productTransaction']);
+Route::get('products/{id}/buyers',[ProductController::class,'productBuyer']);
+Route::get('products/{id}/categories',[ProductController::class,'productCategory']);
+Route::put('products/{id}/categories/{catId}',[ProductController::class,'productCategoryUpdate']);
+Route::delete('products/{id}/categories/{catId}',[ProductController::class,'productCategoryDelete']);
+
+//product Buyer Transaction
+Route::post('products/{proId}/buyers/{buyerId}/transaction',[ProductController::class,'productBuyerUpdate']);
