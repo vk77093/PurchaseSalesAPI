@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Product;
 use Validator;
 use App\Exceptions\Handler;
+use Illuminate\Support\Facades\Storage;
 
 class SellerController extends Controller
 {
@@ -88,9 +89,17 @@ if($validate->fails()){
     return response()->json($validate->errors(),400);
 }
 $data=$request->all();
+// if($data['quantity'] =$request->quantity === 0){
+//     $data['status']=Product::UNAVAILABLE_PRODUCT;
+// }else{
+//     $data['status']=Product::AVAILABLE_PRODUCT;
+// }
 $data['status']=Product::UNAVAILABLE_PRODUCT;
-$data['image']='1.jpg';
+// $data['image']='1.jpg';
+// second parameter is the file system path where from it getted
+$data['image']=$request->image->store('','images');
 $data['seller_id']=$user->id;
+//$data['quantity']=$request->quantity;
 $product=Product::create($data);
 return response()->json(['data'=>$product],200);
 
@@ -120,6 +129,10 @@ return response()->json(['data'=>$product],200);
                     return response()->json('The mentioned product must
                     need to be have atleast one category',409);
                 }
+            }
+            if($request->has('image')){
+                Storage::delete(['','images',$product->image]);
+                $product->image =$request->image->store('','images');
             }
             if($product->isClean()){
                 return response()->json(['message'=>'You need to specify the value for update'],422);
@@ -153,7 +166,10 @@ return response()->json(['data'=>$product],200);
         $seller =Seller::find($id);
         $product = Product::find($proID);
         $this->checkSeller2($seller,$product);
+        Storage::delete(['','images',$product->image]);
         $product->delete();
+        // Storage::delete($product->image);
+      
     return response()->json(['data'=>$product]);
     }
 }
