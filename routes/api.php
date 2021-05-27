@@ -63,3 +63,6 @@ Route::get('seller/{id}/transaction',[SellerController::class,'sellerTransaction
 Route::get('seller/{id}/categories',[SellerController::class,'sallerCategory']);
 Route::get('seller/{id}/buyers',[SellerController::class,'sellerBuyer']);
 Route::get('seller/{id}/products',[SellerController::class,'sellerProduct']);
+Route::post('seller/{id}/products',[SellerController::class,'sellerProductStore']);
+Route::put('seller/{id}/products/{proID}',[SellerController::class,'sellerProductUpdate']);
+Route::delete('seller/{id}/products/{proID}',[SellerController::class,'sellerProductDelete']);
